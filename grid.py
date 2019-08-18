@@ -26,11 +26,11 @@ def plot_points(fig,d,annotations):
 def mouse_move(event):
     visibility_changed = False
     for point, annotation in annotations:
-        should_be_visible = (point.contains(event)[0] == True)
+        show_annotation = (point.contains(event)[0] == True)
 
-        if should_be_visible != annotation.get_visible():
+        if show_annotation != annotation.get_visible():
             visibility_changed = True
-            annotation.set_visible(should_be_visible)
+            annotation.set_visible(show_annotation)
 
     if visibility_changed:        
         plt.draw()
@@ -42,7 +42,7 @@ d = {
 fig = draw_grid()
 annotations=[]
 plot_points(fig,d,annotations)
-on_move_id = fig.canvas.mpl_connect('motion_notify_event', mouse_move)
+fig.canvas.mpl_connect('motion_notify_event', mouse_move)
 plt.show()
 
 
